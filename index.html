@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Be My Valentine 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ffe6f0, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Comic Sans MS", "Segoe UI", sans-serif;
+      text-align: center;
+      color: #d63384;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      font-size: 24px;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      max-width: 90%;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    #yesBtn {
+      background: #ff69b4;
+      color: white;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      position: absolute;
+      background: #f8d7e8;
+      color: #b03060;
+      left: 50%;
+      top: 60px;
+      transform: translateX(-50%);
+    }
+
+    #meme {
+      display: none;
+      margin-top: 20px;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1> Riva K Will you be my Valentine? 💕</h1>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 😢</button>
+    </div>
+
+    <div id="meme">
+      <h2>Good choice ❤️</h2>
+      <img src="data:image/svg+xml;utf8,
+      <svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'>
+        <rect width='100%25' height='100%25' fill='%23ffe6f0'/>
+        <text x='50%25' y='45%25' dominant-baseline='middle' text-anchor='middle'
+          font-size='36' fill='%23d63384' font-family='Comic Sans MS'>
+          Good choice ❤️
+        </text>
+        <text x='50%25' y='65%25' dominant-baseline='middle' text-anchor='middle'
+          font-size='20' fill='%23b03060'>
+          You’re stuck with me now 😘
+        </text>
+      </svg>" />
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const meme = document.getElementById("meme");
+
+    function moveNoButton() {
+      const container = document.querySelector(".buttons");
+      const maxX = container.offsetWidth - noBtn.offsetWidth;
+      const maxY = container.offsetHeight - noBtn.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    yesBtn.addEventListener("click", () => {
+      meme.style.display = "block";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+    });
+
+    /* Create floating hearts */
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      heart.style.fontSize = (16 + Math.random() * 20) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
+
+</body>
+</html>
